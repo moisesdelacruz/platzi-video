@@ -1,5 +1,5 @@
 import React from 'react';
-import Category from './category.js'
+import Category from './category'
 
 import './categories.css';
 

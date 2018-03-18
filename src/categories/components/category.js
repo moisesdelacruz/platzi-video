@@ -1,5 +1,5 @@
 import React from 'react';
-import Playlist from '../../playlist/components/playlist.js';
+import Playlist from '../../playlist/components/playlist';
 
 import './category.css';
 
