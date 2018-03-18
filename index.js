@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Media from './src/playlist/components/media';
+import Playlist from './src/playlist/components/playlist';
+import data from './src/api.json';
 
 const container = document.getElementById('app');
 
-render(<Media type="video" title="¿Qué es responsive designe?" author="Moises de la Cruz." image="./images/covers/responsive.jpg"/>, container)
+render(<Playlist data={data} />, container)
