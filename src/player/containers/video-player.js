@@ -14,7 +14,13 @@ class VideoPlayer extends Component {
       pause: !this.state.pause
     })
   }
-  
+
+  componentDidMount() {
+    this.setState({
+      pause: (!this.props.autoplay)
+    })
+  }
+
   render() {
     return (
       <VideoPlayerLayout>
@@ -24,7 +30,8 @@ class VideoPlayer extends Component {
           handleClick={this.togglePlay}
         />
         <Video
-          autoplay={true}
+          autoplay={this.props.autoplay}
+          pause={this.state.pause}
           src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
         />
       </VideoPlayerLayout>
