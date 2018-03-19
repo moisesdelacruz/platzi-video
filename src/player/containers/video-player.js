@@ -6,6 +6,7 @@ import PlayPause from '../components/play-pause';
 import Timer from '../components/timer';
 import Controls from '../components/video-player-controls';
 import ProgressBar from '../components/progress-bar';
+import Spinner from '../components/spinner';
 
 import { formattedTime } from '../../utils/format-time';
 
@@ -14,6 +15,7 @@ class VideoPlayer extends Component {
     pause: true,
     duration: 0,
     currentTime: 0,
+    loading: true,
   }
 
   togglePlay = (event) => {
@@ -45,6 +47,24 @@ class VideoPlayer extends Component {
     this.video.currentTime = event.target.value;
   }
 
+  handleSeeking = event => {
+    this.setState({
+      loading: true,
+    })
+  }
+
+  handleSeeked = event => {
+    this.setState({
+      loading: false,
+    })
+  }
+
+  handleCanPlayThrough = event => {
+    this.setState({
+      loading: false,
+    })
+  }
+
   render() {
     return (
       <VideoPlayerLayout>
@@ -64,11 +84,17 @@ class VideoPlayer extends Component {
             handleProgressChange={this.handleProgressChange}
           />
         </Controls>
+        <Spinner
+          active={this.state.loading}
+        />
         <Video
           autoplay={this.props.autoplay}
           pause={this.state.pause}
           handleLoadedMetadata={this.handleLoadedMetadata}
           handleTimeUpdate={this.handleTimeUpdate}
+          handleSeeking={this.handleSeeking}
+          handleSeeked={this.handleSeeked}
+          handleCanPlayThrough={this.handleCanPlayThrough}
           src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
         />
       </VideoPlayerLayout>
