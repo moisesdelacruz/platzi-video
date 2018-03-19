@@ -6,10 +6,13 @@ import PlayPause from '../components/play-pause';
 import Timer from '../components/timer';
 import Controls from '../components/video-player-controls';
 
+import { formattedTime } from '../../utils/format-time';
+
 class VideoPlayer extends Component {
   state = {
     pause: true,
     duration: 0,
+    currentTime: 0,
   }
 
   togglePlay = (event) => {
@@ -27,7 +30,13 @@ class VideoPlayer extends Component {
   handleLoadedMetadata = event => {
     this.video = event.target;
     this.setState({
-      duration: this.video.duration,
+      duration: formattedTime(this.video.duration),
+    });
+  }
+
+  handleTimeUpdate = event => {
+    this.setState({
+      currentTime: formattedTime(this.video.currentTime),
     });
   }
 
@@ -42,12 +51,14 @@ class VideoPlayer extends Component {
           />
           <Timer
             duration={this.state.duration}
+            currentTime={this.state.currentTime}
           />
         </Controls>
         <Video
           autoplay={this.props.autoplay}
           pause={this.state.pause}
           handleLoadedMetadata={this.handleLoadedMetadata}
+          handleTimeUpdate={this.handleTimeUpdate}
           src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
         />
       </VideoPlayerLayout>
