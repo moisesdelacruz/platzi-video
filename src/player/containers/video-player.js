@@ -96,7 +96,7 @@ class VideoPlayer extends Component {
       <VideoPlayerLayout
         setRef={this.setRef}
       >
-        <Title title="Esto es un video chido!" />
+        <Title title={this.props.title} />
         <Controls>
           <PlayPause
             pause={this.state.pause}
@@ -131,7 +131,7 @@ class VideoPlayer extends Component {
           handleSeeking={this.handleSeeking}
           handleSeeked={this.handleSeeked}
           handleCanPlayThrough={this.handleCanPlayThrough}
-          src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4"
+          src={this.props.src}
         />
       </VideoPlayerLayout>
     )
