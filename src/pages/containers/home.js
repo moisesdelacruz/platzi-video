@@ -8,16 +8,17 @@ import HandleError from '../../error/containers/handle-error';
 import VideoPlayer from '../../player/containers/video-player';
 import { connect } from 'react-redux';
 import { List as list } from 'immutable';
-import { openModal, closeModal } from '../../actions';
+import * as actions from '../../actions';
+import { bindActionCreators } from 'redux';
 
 
 class Home extends Component {
   handleOpenModal = (id) => {
-    this.props.dispatch(openModal(id))
+    this.props.actions.openModal(id)
   }
 
   handleCloseModal = (event) => {
-    this.props.dispatch(closeModal())
+    this.props.actions.closeModal()
   }
 
   render() {
@@ -70,4 +71,11 @@ function mapStateToProps (state, props) {
   }
 }
 
-export default connect(mapStateToProps)(Home);
+function mapDispatchToProps (dispatch) {
+  return {
+    // bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
